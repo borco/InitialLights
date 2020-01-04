@@ -16,7 +16,7 @@ namespace lights {
 
 class ILight;
 
-class LightCollection : public QObject
+class INITIALLIGHTSSHARED_EXPORT LightCollection : public QObject
 {
     Q_OBJECT
 

@@ -11,7 +11,7 @@ namespace il {
 
 class IIndexed;
 
-class SimpleIndexer : public QObject, public IIndexer
+class INITIALLIGHTSSHARED_EXPORT SimpleIndexer : public QObject, public IIndexer
 {
     Q_OBJECT
 public:
