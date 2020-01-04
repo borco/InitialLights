@@ -76,7 +76,7 @@ Page {
     Connections {
         target: backend ? backend.bluetoothExplorer : null
 
-        onSearchFinished: {
+        onDiscoverFinished: {
             controllersScanDialog.close()
         }
     }
