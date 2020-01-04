@@ -89,9 +89,9 @@ void BluetoothController::controllerDisconnected()
     update_message("Controller disconnected");
     qWarning() << "+++ controller disconnected";
 
-    m_controller->disconnectFromDevice();
-    m_lightsService.reset();
     m_buttonsService.reset();
+    m_lightsService.reset();
+    m_controller.reset();
 
     update_isConnecting(false);
     update_isConnected(false);
