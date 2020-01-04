@@ -10,7 +10,6 @@
 namespace il {
 
 namespace  {
-const QString jsonUser { "user" };
 const QString jsonIsLogged { "isLogged" };
 }
 
@@ -25,19 +24,19 @@ User::~User()
 {
 }
 
-void User::read(const QJsonObject &json)
+void User::read(const QJsonObject &json, const QString &tag)
 {
-    if (json.contains(jsonUser) && json[jsonUser].isObject()) {
-        QJsonObject localJson = json[jsonUser].toObject();
+    if (json.contains(tag) && json[tag].isObject()) {
+        QJsonObject localJson = json[tag].toObject();
         READ_PROPERTY_IF_EXISTS(bool, localJson, jsonIsLogged, isLogged)
     }
 }
 
-void User::write(QJsonObject &json) const
+void User::write(QJsonObject &json, const QString &tag) const
 {
     QJsonObject localJson;
     localJson[jsonIsLogged] = m_isLogged;
-    json[jsonUser] = localJson;
+    json[tag] = localJson;
 }
 
 void User::clearLocalData()

@@ -17,8 +17,8 @@ public:
     explicit User(QObject *parent = nullptr);
     virtual ~User();
 
-    void read(const QJsonObject& json);
-    void write(QJsonObject& json) const;
+    void read(const QJsonObject& json, const QString& tag);
+    void write(QJsonObject& json, const QString& tag) const;
     void clearLocalData();
 
 signals:

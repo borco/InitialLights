@@ -24,6 +24,7 @@ namespace  {
 const QString jsonShowOnboardingTag { "showOnboarding" };
 const QString jsonShowInitialSetupTag { "showInitialSetup" };
 const QString jsonGuiConfigTag { "guiConfig" };
+const QString jsonUserTag { "user" };
 
 QString localDataDirName()
 {
@@ -110,8 +111,7 @@ void BackEnd::read(const QJsonObject &json)
 
     m_controllers->read(json);
     m_rooms->read(json);
-    m_user->read(json);
-
+    m_user->read(json, jsonUserTag);
     m_guiConfig->read(json, jsonGuiConfigTag);
 }
 
@@ -122,8 +122,7 @@ void BackEnd::write(QJsonObject &json) const
 
     m_controllers->write(json);
     m_rooms->write(json);
-    m_user->write(json);
-
+    m_user->write(json, jsonUserTag);
     m_guiConfig->write(json, jsonGuiConfigTag);
 }
 
