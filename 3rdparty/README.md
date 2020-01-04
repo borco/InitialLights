@@ -17,6 +17,6 @@ git commit -m "added subtree http://gitlab.unique-conception.org/qt-qml-tricks/q
 
 ## List of libraries
 
-* [QtSuperMacros](https://gitlab.unique-conception.org/qt-qml-tricks/qt-supermacros.git)
-* [QtQmlModels](https://gitlab.unique-conception.org/qt-qml-tricks/qt-qml-models.git)
+* [QtSuperMacros](http://gitlab.unique-conception.org/qt-qml-tricks/qt-supermacros.git)
+* [QtQmlModels](http://gitlab.unique-conception.org/qt-qml-tricks/qt-qml-models.git)
 * [FakeIt](https://github.com/eranpeer/FakeIt.git)
