@@ -34,33 +34,31 @@ Page {
                 anchors.left: parent.left
 
                 ILButtonWithBusyIndicator {
-                    text: "Search Controllers"
+                    text: "Discover Controllers"
                     Layout.fillWidth: true
-                    enabled: !busy && !continuosSearchSwitch.checked
-                    busy: backend ? backend.bluetoothExplorer.isSearching : false
-                    onClicked: {
-                        backend.bluetoothExplorer.search()
-                    }
+                    enabled: !busy && !continuosDiscoverySwitch.checked
+                    busy: backend ? backend.bluetoothExplorer.isDiscovering : false
+                    onClicked: backend.bluetoothExplorer.discover()
                 }
 
                 RowLayout {
                     Text {
-                        text: "Continuous Search"
+                        text: "Continuous Discovery"
                     }
 
                     Switch {
-                        id: continuosSearchSwitch
-                        checked: backend ? backend.guiConfig.isScanningPeriodically : false
-                        onToggled: if (backend) backend.guiConfig.isScanningPeriodically = checked
+                        id: continuosDiscoverySwitch
+                        checked: backend ? backend.guiConfig.isDiscoveringPeriodically : false
+                        onToggled: if (backend) backend.guiConfig.isDiscoveringPeriodically = checked
                     }
 
                     Timer {
-                        id: continuosSearchTimer
+                        id: continuosDiscoveryTimer
                         repeat: true
                         triggeredOnStart: true
-                        running: continuosSearchSwitch.checked
+                        running: continuosDiscoverySwitch.checked
                         interval: 20000 // in msec
-                        onTriggered: if (backend) backend.bluetoothExplorer.search()
+                        onTriggered: if (backend) backend.bluetoothExplorer.discover()
                     }
                 }
 

@@ -64,18 +64,18 @@ BluetoothExplorer::BluetoothExplorer(controllers::ControllerCollection* controll
             this, &BluetoothExplorer::discoveryFinished);
 }
 
-void BluetoothExplorer::search()
+void BluetoothExplorer::discover()
 {
-    if (isSearching()) {
-//        qDebug() << "already searching; ignore new search request...";
+    if (isDiscovering()) {
+        qDebug() << "already discovering; ignore new discovery request...";
         return;
     }
 
     m_onlineControllers.clear();
-    update_isSearching(true);
-    set_message("Searching for controllers...");
+    update_isDiscovering(true);
+    set_message("Discovering controllers...");
 
-    m_deviceDiscoveryAgent.setLowEnergyDiscoveryTimeout(searchTimeout());
+    m_deviceDiscoveryAgent.setLowEnergyDiscoveryTimeout(discoverTimeout());
     m_deviceDiscoveryAgent.start(QBluetoothDeviceDiscoveryAgent::LowEnergyMethod);
 }
 
@@ -99,9 +99,11 @@ void BluetoothExplorer::deviceDiscovered(const QBluetoothDeviceInfo &info)
         controllers::Controller* controller = findController(m_controllers, info);
         if (controller) {
             if (!controller->isOnline()) {
-                qDebug() << "setting controller to online:" << controller->name() << controller->address();
+                qDebug() << "setting controller online:" << controller->name() << controller->address();
                 controller->set_isOnline(true);
                 controller->bluetoothController()->connectToController(info);
+            } else {
+                qDebug() << "controller already online:" << controller->name() << controller->address();
             }
             m_onlineControllers << controller;
         } else {
@@ -109,9 +111,9 @@ void BluetoothExplorer::deviceDiscovered(const QBluetoothDeviceInfo &info)
             controller = m_controllers->appendNewController(bluetoothController);
             configureController(controller, info);
             qWarning() << "LE Device name:" << controller->name()
-                       << "address:" << controller->address() << "scanned; adding it to the devices list...";
+                       << "address:" << controller->address() << "discovered; adding it to the devices list...";
         }
-        set_message("Low Energy device found. Scanning for more...");
+        set_message("Low Energy device found. Looking for more...");
     }
     //...
 }
@@ -134,12 +136,18 @@ void BluetoothExplorer::discoveryFinished()
 {
     updateOfflineControllers();
 
-//    qDebug() << "search finished";
-    update_isSearching(false);
+    qDebug() << "discovery finished";
+    qDebug() << "discovered controllers:" << m_controllers->get_items()->size() << "online controllers:" << m_onlineControllers.size();
+    for(int i = 0; i<m_controllers->get_items()->size(); ++i) {
+        auto controller = m_controllers->get_items()->at(i);
+        qDebug() << "  " << (controller->isOnline() ? "ONLINE ": "OFFLINE") << controller->name() << controller->address();
+    }
+
+    update_isDiscovering(false);
     set_message(m_controllers->get_items()->size() == 0
                     ? "No Low Energy devices found"
                     : QString("Found %1 device(s)").arg(m_controllers->get_items()->size()));
-    emit searchFinished();
+    emit discoverFinished();
 }
 
 } // namespace bluetooth

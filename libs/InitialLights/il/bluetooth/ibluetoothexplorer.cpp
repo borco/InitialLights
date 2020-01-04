@@ -5,8 +5,8 @@ namespace bluetooth {
 
 IBluetoothExplorer::IBluetoothExplorer(QObject *parent)
     : QObject(parent)
-    , m_isSearching { false }
-    , m_searchTimeout { 10000 } // in msec
+    , m_isDiscovering { false }
+    , m_discoverTimeout { 10000 } // in msec
 {
 }
 

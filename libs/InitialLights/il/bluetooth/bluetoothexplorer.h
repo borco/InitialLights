@@ -22,7 +22,7 @@ public:
     explicit BluetoothExplorer(controllers::ControllerCollection* controllers, QObject *parent = nullptr);
 
 public slots:
-    void search() override;
+    void discover() override;
 
 private:
     void updateOfflineControllers();

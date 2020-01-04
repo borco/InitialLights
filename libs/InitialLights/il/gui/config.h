@@ -10,7 +10,7 @@ class Config : public QObject
 {
     Q_OBJECT
 
-    QML_WRITABLE_AUTO_PROPERTY(bool, isScanningPeriodically)
+    QML_WRITABLE_AUTO_PROPERTY(bool, isDiscoveringPeriodically)
 
 public:
     explicit Config(QObject *parent = nullptr);

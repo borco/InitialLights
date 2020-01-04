@@ -8,13 +8,13 @@ namespace il {
 namespace gui {
 
 namespace {
-const bool defaultIsScanningPeriodically { false };
-const QString jsonIsScanningPeriodicallyTag { "isScanningPeriodically"};
+const bool defaultIsDiscoveringPeriodically { false };
+const QString jsonIsDiscoveringPeriodicallyTag { "isDiscoveringPeriodically"};
 }
 
 Config::Config(QObject *parent)
     : QObject(parent)
-    , m_isScanningPeriodically(defaultIsScanningPeriodically)
+    , m_isDiscoveringPeriodically(defaultIsDiscoveringPeriodically)
 {
 }
 
@@ -34,19 +34,19 @@ void Config::read(const QJsonObject &json, const QString &tag)
 
     QJsonObject localJson = localValue.toObject();
 
-    READ_PROPERTY_IF_EXISTS(bool, localJson, jsonIsScanningPeriodicallyTag, isScanningPeriodically)
+    READ_PROPERTY_IF_EXISTS(bool, localJson, jsonIsDiscoveringPeriodicallyTag, isDiscoveringPeriodically)
 }
 
 void Config::write(QJsonObject &json, const QString &tag) const
 {
     QJsonObject localJson;
-    localJson[jsonIsScanningPeriodicallyTag] = m_isScanningPeriodically;
+    localJson[jsonIsDiscoveringPeriodicallyTag] = m_isDiscoveringPeriodically;
     json[tag] = localJson;
 }
 
 void Config::clearLocalData()
 {
-    set_isScanningPeriodically(defaultIsScanningPeriodically);
+    set_isDiscoveringPeriodically(defaultIsDiscoveringPeriodically);
 }
 
 } // namespace gui
