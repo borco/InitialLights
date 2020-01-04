@@ -43,7 +43,7 @@ private:
     QScopedPointer<QLowEnergyController> m_controller;
     QScopedPointer<QLowEnergyService> m_lightsService;
     QScopedPointer<QLowEnergyService> m_buttonsService;
-    QList<QLowEnergyDescriptor> m_lightNotificationDescriptors;
+//    QList<QLowEnergyDescriptor> m_lightNotificationDescriptors;
 
     bool m_isDiscoveringLightsService { false };
     bool m_isDiscoveringButtonsService { false };
