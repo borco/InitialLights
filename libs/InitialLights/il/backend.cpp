@@ -3,6 +3,7 @@
 #include "bluetooth/bluetoothexplorer.h"
 #include "controllers/controller.h"
 #include "controllers/controllercollection.h"
+#include "gui/config.h"
 #include "jsonhelper.h"
 #include "roomcollection.h"
 #include "simpleindexer.h"
@@ -22,6 +23,7 @@ namespace  {
 
 const QString jsonShowOnboardingTag { "showOnboarding" };
 const QString jsonShowInitialSetupTag { "showInitialSetup" };
+const QString jsonGuiConfigTag { "guiConfig" };
 
 QString localDataDirName()
 {
@@ -50,6 +52,8 @@ BackEnd::BackEnd(QObject *parent)
     m_controllers = new controllers::ControllerCollection(this);
     m_rooms = new RoomCollection(indexerAllocator, this);
     m_bluetoothExplorer = new bluetooth::BluetoothExplorer(m_controllers, this);
+
+    m_guiConfig = new gui::Config(this);
 }
 
 BackEnd::~BackEnd()
@@ -107,6 +111,8 @@ void BackEnd::read(const QJsonObject &json)
     m_controllers->read(json);
     m_rooms->read(json);
     m_user->read(json);
+
+    m_guiConfig->read(json, jsonGuiConfigTag);
 }
 
 void BackEnd::write(QJsonObject &json) const
@@ -117,6 +123,8 @@ void BackEnd::write(QJsonObject &json) const
     m_controllers->write(json);
     m_rooms->write(json);
     m_user->write(json);
+
+    m_guiConfig->write(json, jsonGuiConfigTag);
 }
 
 void BackEnd::clearLocalData()

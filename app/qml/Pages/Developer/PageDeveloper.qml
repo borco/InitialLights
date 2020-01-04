@@ -50,7 +50,8 @@ Page {
 
                     Switch {
                         id: continuosSearchSwitch
-                        checked: true
+                        checked: backend ? backend.guiConfig.isScanningPeriodically : false
+                        onToggled: if (backend) backend.guiConfig.isScanningPeriodically = checked
                     }
 
                     Timer {

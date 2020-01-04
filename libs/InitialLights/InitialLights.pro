@@ -31,6 +31,7 @@ SOURCES += \
         il/bluetooth/ibluetoothexplorer.cpp \
         il/controllers/controller.cpp \
         il/controllers/controllercollection.cpp \
+        il/gui/config.cpp \
         il/iindexed.cpp \
         il/iindexer.cpp \
         il/jsonhelper.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
         il/bluetooth/ibluetoothexplorer.h \
         il/controllers/controller.h \
         il/controllers/controllercollection.h \
+        il/gui/config.h \
         il/iindexed.h \
         il/iindexer.h \
         il/jsonhelper.h \
