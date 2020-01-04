@@ -36,6 +36,7 @@ void configureController(controllers::Controller *controller, const QBluetoothDe
     controller->set_name(info.name());
     controller->set_address(safeAddress(info));
     controller->set_isOnline(true);
+    controller->bluetoothController()->connectToController(info);
 }
 
 controllers::Controller* findController(controllers::ControllerCollection* controllers, const QBluetoothDeviceInfo &info)
@@ -105,7 +106,6 @@ void BluetoothExplorer::deviceDiscovered(const QBluetoothDeviceInfo &info)
             } else {
                 qDebug() << "controller already online:" << controller->name() << controller->address();
             }
-            m_onlineControllers << controller;
         } else {
             auto bluetoothController = new BluetoothController;
             controller = m_controllers->appendNewController(bluetoothController);
@@ -113,6 +113,7 @@ void BluetoothExplorer::deviceDiscovered(const QBluetoothDeviceInfo &info)
             qWarning() << "LE Device name:" << controller->name()
                        << "address:" << controller->address() << "discovered; adding it to the devices list...";
         }
+        m_onlineControllers << controller;
         set_message("Low Energy device found. Looking for more...");
     }
     //...
