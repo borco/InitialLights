@@ -38,6 +38,7 @@ Controller::Controller(bluetooth::IBluetoothController *bluetoothController, QOb
     , m_bluetoothController { bluetoothController }
 {
     bluetoothController->setParent(this);
+    connect(bluetoothController, &bluetooth::IBluetoothController::isConnectedChanged, this, &Controller::bluetoothControllerIsConnectedChanged);
 }
 
 Controller::~Controller()
@@ -92,6 +93,13 @@ void Controller::set_kind(Controller::Kind kind)
     }
     case Unknown:
         break;
+    }
+}
+
+void Controller::bluetoothControllerIsConnectedChanged()
+{
+    if (!m_bluetoothController->isConnected()) {
+        set_isOnline(false);
     }
 }
 

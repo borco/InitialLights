@@ -58,6 +58,8 @@ public slots:
     void set_kind(Kind kind);
 
 private:
+    void bluetoothControllerIsConnectedChanged();
+
     Kind m_kind;
     lights::LightCollection* m_lights;
     bluetooth::IBluetoothController* m_bluetoothController;
