@@ -1,5 +1,4 @@
-#ifndef INITIALLIGHTS_GLOBAL_H
-#define INITIALLIGHTS_GLOBAL_H
+#pragma once
 
 #include <QtCore/qglobal.h>
 
@@ -8,7 +7,3 @@
 #else
 #  define INITIALLIGHTSSHARED_EXPORT Q_DECL_IMPORT
 #endif
-
-#define SCENE_COUNT 6
-
-#endif // INITIALLIGHTS_GLOBAL_H
