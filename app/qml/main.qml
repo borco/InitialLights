@@ -115,12 +115,12 @@ ApplicationWindow {
 
     Connections {
         target: Qt.application
-//        onStateChanged: {
-//            if (Qt.application.state === Qt.ApplicationSuspended) {
-//                console.log("application suspended")
-//                backend.saveLocalData()
-//            }
-//        }
+        onStateChanged: {
+            if (Qt.application.state === Qt.ApplicationSuspended) {
+                console.log("application suspended")
+                backend.saveLocalData()
+            }
+        }
         onAboutToQuit: {
             console.log("application about to quit")
             backend.saveLocalData()
