@@ -9,6 +9,7 @@
 #include <QtSvg>
 #endif
 
+#include <QLoggingCategory>
 #include <QQmlContext>
 
 #include "il/backend.h"
@@ -55,6 +56,8 @@ void loadAppFonts()
 
 int main(int argc, char *argv[])
 {
+    QLoggingCategory::setFilterRules(QStringLiteral("qt.bluetooth* = true"));
+
     // register C++ types
     qmlRegisterUncreatableType<il::bluetooth::BluetoothExplorer>("InitialLights", 1, 0, "BluetoothExplorer", "Type cannot be created in QML");
     qmlRegisterUncreatableType<il::controllers::Controller>("InitialLights", 1, 0, "Controller", "Type cannot be created in QML");
