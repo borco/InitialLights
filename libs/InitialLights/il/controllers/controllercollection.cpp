@@ -27,10 +27,6 @@ void readCollectionPropertyIfExists<controllers::Controller>(const QJsonObject& 
     }
 }
 
-namespace {
-const QString jsonControllersTag { "controllers" };
-}
-
 namespace controllers {
 
 ControllerCollection::ControllerCollection(QObject *parent)
@@ -43,17 +39,17 @@ ControllerCollection::~ControllerCollection()
 {
 }
 
-void ControllerCollection::read(const QJsonObject &json)
+void ControllerCollection::read(const QJsonObject &json, const QString &tag)
 {
-    readCollectionPropertyIfExists<Controller>(json, jsonControllersTag, m_items);
+    readCollectionPropertyIfExists<Controller>(json, tag, m_items);
     std::for_each (m_items->begin(), m_items->end(), [this](Controller* controller) {
         connect(controller, &Controller::kindChanged, this, &ControllerCollection::onControllerKindChanged);
     });
 }
 
-void ControllerCollection::write(QJsonObject &json) const
+void ControllerCollection::write(QJsonObject &json, const QString &tag) const
 {
-    writeCollectionProperty(json, jsonControllersTag, m_items);
+    writeCollectionProperty(json, tag, m_items);
 }
 
 void ControllerCollection::clearLocalData()

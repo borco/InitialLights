@@ -23,6 +23,8 @@ namespace  {
 
 const QString jsonShowOnboardingTag { "showOnboarding" };
 const QString jsonShowInitialSetupTag { "showInitialSetup" };
+
+const QString jsonControllersTag { "controllers" };
 const QString jsonGuiConfigTag { "guiConfig" };
 const QString jsonUserTag { "user" };
 
@@ -109,7 +111,7 @@ void BackEnd::read(const QJsonObject &json)
     READ_PROPERTY_IF_EXISTS(bool, json, jsonShowOnboardingTag, showOnboarding)
     READ_PROPERTY_IF_EXISTS(bool, json, jsonShowInitialSetupTag, showInitialSetup)
 
-    m_controllers->read(json);
+    m_controllers->read(json, jsonControllersTag);
     m_rooms->read(json);
     m_user->read(json, jsonUserTag);
     m_guiConfig->read(json, jsonGuiConfigTag);
@@ -120,7 +122,7 @@ void BackEnd::write(QJsonObject &json) const
     json[jsonShowOnboardingTag] = m_showOnboarding;
     json[jsonShowInitialSetupTag] = m_showInitialSetup;
 
-    m_controllers->write(json);
+    m_controllers->write(json, jsonControllersTag);
     m_rooms->write(json);
     m_user->write(json, jsonUserTag);
     m_guiConfig->write(json, jsonGuiConfigTag);

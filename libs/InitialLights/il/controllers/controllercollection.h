@@ -25,8 +25,8 @@ public:
     explicit ControllerCollection(QObject *parent = nullptr);
     ~ControllerCollection() override;
 
-    void read(const QJsonObject& json);
-    void write(QJsonObject& json) const;
+    void read(const QJsonObject& json, const QString& tag);
+    void write(QJsonObject& json, const QString& tag) const;
     void clearLocalData();
 
     Controller* appendNewController(bluetooth::IBluetoothController* bluetoothController);
