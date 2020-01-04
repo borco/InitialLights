@@ -35,8 +35,9 @@ void configureController(controllers::Controller *controller, const QBluetoothDe
 {
     controller->set_name(info.name());
     controller->set_address(safeAddress(info));
-    controller->set_isOnline(true);
+    controller->bluetoothController()->disconnectFromController();
     controller->bluetoothController()->connectToController(info);
+    controller->set_isOnline(true);
 }
 
 controllers::Controller* findController(controllers::ControllerCollection* controllers, const QBluetoothDeviceInfo &info)

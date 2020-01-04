@@ -53,7 +53,9 @@ void BluetoothController::disconnectFromController()
     if (!isConnected())
         return;
 
-    update_isConnected(false);
+    qDebug() << "+++ forcing bluetooth controller to disconnect";
+
+    controllerDisconnected();
 }
 
 void BluetoothController::lightWriteWithoutResponse(IBluetoothController::Light light, const QByteArray &data)
@@ -74,7 +76,7 @@ void BluetoothController::lightWriteWithoutResponse(IBluetoothController::Light 
         return;
     }
 
-    // qDebug() << "+++ writing to light" << characteristic.uuid() << ":" << data.toHex().toUpper();
+    qDebug() << "+++ writing to light" << characteristic.uuid() << ":" << data.toHex().toUpper();
     m_lightsService->writeCharacteristic(characteristic, data,  QLowEnergyService::WriteMode::WriteWithoutResponse);
 }
 
