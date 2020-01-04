@@ -10,10 +10,6 @@
 
 namespace il {
 
-namespace {
-const QString jsonRoomsTag { "rooms" };
-}
-
 RoomCollection::RoomCollection(std::function<IIndexer* (IIndexed *, QObject *)> indexerAllocator, QObject *parent)
     : QObject(parent)
     , m_items { new QQmlObjectListModel<Room>(this) }
@@ -44,15 +40,15 @@ std::vector<int> RoomCollection::indexes() const
     return ret;
 }
 
-void RoomCollection::read(const QJsonObject &json)
+void RoomCollection::read(const QJsonObject &json, const QString& tag)
 {
-    readCollectionPropertyIfExists<Room>(json, jsonRoomsTag, m_items);
+    readCollectionPropertyIfExists<Room>(json, tag, m_items);
     m_indexer->rebuild();
 }
 
-void RoomCollection::write(QJsonObject &json) const
+void RoomCollection::write(QJsonObject &json, const QString &tag) const
 {
-    writeCollectionProperty(json, jsonRoomsTag, m_items);
+    writeCollectionProperty(json, tag, m_items);
 }
 
 void RoomCollection::clearLocalData()

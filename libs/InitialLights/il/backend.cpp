@@ -26,6 +26,7 @@ const QString jsonShowInitialSetupTag { "showInitialSetup" };
 
 const QString jsonControllersTag { "controllers" };
 const QString jsonGuiConfigTag { "guiConfig" };
+const QString jsonRoomsTag { "rooms" };
 const QString jsonUserTag { "user" };
 
 QString localDataDirName()
@@ -112,7 +113,7 @@ void BackEnd::read(const QJsonObject &json)
     READ_PROPERTY_IF_EXISTS(bool, json, jsonShowInitialSetupTag, showInitialSetup)
 
     m_controllers->read(json, jsonControllersTag);
-    m_rooms->read(json);
+    m_rooms->read(json, jsonRoomsTag);
     m_user->read(json, jsonUserTag);
     m_guiConfig->read(json, jsonGuiConfigTag);
 }
@@ -123,7 +124,7 @@ void BackEnd::write(QJsonObject &json) const
     json[jsonShowInitialSetupTag] = m_showInitialSetup;
 
     m_controllers->write(json, jsonControllersTag);
-    m_rooms->write(json);
+    m_rooms->write(json, jsonRoomsTag);
     m_user->write(json, jsonUserTag);
     m_guiConfig->write(json, jsonGuiConfigTag);
 }

@@ -25,8 +25,8 @@ public:
     int maxIndex() const override;
     std::vector<int> indexes() const override;
 
-    void read(const QJsonObject& json);
-    void write(QJsonObject& json) const;
+    void read(const QJsonObject& json, const QString& tag);
+    void write(QJsonObject& json, const QString& tag) const;
     void clearLocalData();
 
 public slots:
