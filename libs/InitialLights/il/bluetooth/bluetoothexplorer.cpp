@@ -81,8 +81,7 @@ void BluetoothExplorer::search()
 
 void BluetoothExplorer::updateOfflineControllers()
 {
-//    QSet<controllers::Controller*> controllers = QSet(m_controllers->get_items()->begin(), m_controllers->get_items()->end());
-    QSet<controllers::Controller*> controllers = m_controllers->get_items()->toList().toSet();
+    QSet<controllers::Controller*> controllers = QSet(m_controllers->get_items()->begin(), m_controllers->get_items()->end());
     controllers.subtract(m_onlineControllers);
     std::for_each(controllers.begin(), controllers.end(),
                   [](controllers::Controller* controller) {
