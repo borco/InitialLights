@@ -68,7 +68,7 @@ ApplicationWindow {
         id: loginLobbyView
         PageLoginLobby {
             stackView: mainStackView
-            user: backend.user
+            user: backend ? backend.user : null
         }
     }
 
