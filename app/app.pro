@@ -47,3 +47,7 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android
 }
+
+ios {
+    QMAKE_INFO_PLIST = ios/Info.plist
+}
